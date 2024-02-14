@@ -116,6 +116,7 @@ plt.subplot(122)
 plt.imshow(mask_for_plot, cmap='gray')
 plt.title('Mask')
 plt.savefig("figure02.png")
+plt.close()
 
 # Now, let us copy images and masks with real information to a new folder.
 # real information = if mask has decent amount of labels other than 0.
@@ -126,17 +127,16 @@ for img in range(len(img_list)):  # Using t1_list as all lists are of same size
     mask_name = msk_list[img]
     print("Now preparing image and masks number: ", img)
 
-    temp_image = cv2.imread(train_img_dir + img_list[img], 1)
-
-    temp_mask = cv2.imread(train_mask_dir + msk_list[img], 0)
+    temp_image = cv2.imread(os.path.join(train_img_dir, img_list[img]), 1)
+    temp_mask = cv2.imread(os.path.join(train_mask_dir, msk_list[img]), 0)
     # temp_mask=temp_mask.astype(np.uint8)
 
     val, counts = np.unique(temp_mask, return_counts=True)
 
     if (1 - (counts[0] / counts.sum())) > 0.05:  # At least 5% useful area with labels that are not 0
         print("Save Me")
-        cv2.imwrite('data/256_patches/images_with_useful_info/images/' + img_name, temp_image)
-        cv2.imwrite('data/256_patches/images_with_useful_info/masks/' + mask_name, temp_mask)
+        cv2.imwrite(os.path.join(work_dir, "256_patches", "images_with_useful_info/images/" + img_name), temp_image)
+        cv2.imwrite(os.path.join(work_dir, "256_patches", "images_with_useful_info/masks/" + mask_name), temp_mask)
 
     else:
         print("I am useless")
@@ -156,8 +156,8 @@ pip install split-folders
 """
 import splitfolders  # or import split_folders
 
-input_folder = 'data/256_patches/images_with_useful_info/'
-output_folder = 'data/data_for_training_and_testing/'
+input_folder = os.path.join(work_dir, "256_patches", "images_with_useful_info")
+output_folder = os.path.join(work_dir, 'results')
 # Split with a ratio.
 # To only split into training and validation set, set a tuple to `ratio`, i.e, `(.8, .2)`.
 splitfolders.ratio(input_folder, output=output_folder, seed=42, ratio=(.75, .25), group_prefix=None) # default values
