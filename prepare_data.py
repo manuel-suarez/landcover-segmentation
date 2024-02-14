@@ -30,6 +30,8 @@ labels, count = np.unique(temp_mask[:,:,0], return_counts=True)
 print("Labels are: ", labels, " and the counts are: ", count)
 os.makedirs(os.path.join(work_dir, "256_patches", "images"), exist_ok=True)
 os.makedirs(os.path.join(work_dir, "256_patches", "masks"), exist_ok=True)
+os.makedirs(os.path.join(work_dir, "256_patches", "images_with_useful_info", "images"), exist_ok=True)
+os.makedirs(os.path.join(work_dir, "256_patches", "images_with_useful_info", "masks"), exist_ok=True)
 patch_size = 256
 for path, subdirs, files in os.walk(img_dir):
     # print(path)
