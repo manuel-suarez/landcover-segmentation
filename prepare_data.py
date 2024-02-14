@@ -13,3 +13,8 @@ from tensorflow import keras
 import segmentation_models as sm
 from tensorflow.keras.metrics import MeanIoU
 import random
+
+# Configure dirs
+home_dir = os.path.expanduser('~')
+data_dir = os.path.join(home_dir, 'data')
+work_dir = os.path.join(data_dir, 'landcover-ai')
