@@ -28,7 +28,8 @@ plt.close()
 temp_mask = cv2.imread(os.path.join(mask_dir, 'M-34-51-C-d-4-1.tif'))
 labels, count = np.unique(temp_mask[:,:,0], return_counts=True)
 print("Labels are: ", labels, " and the counts are: ", count)
-
+os.makedirs(os.path.join(work_dir, "256_patches", "images"), exist_ok=True)
+os.makedirs(os.path.join(work_dir, "256_patches", "masks"), exist_ok=True)
 patch_size = 256
 for path, subdirs, files in os.walk(img_dir):
     # print(path)
@@ -55,8 +56,7 @@ for path, subdirs, files in os.walk(img_dir):
                 for j in range(patches_img.shape[1]):
                     single_patch_img = patches_img[i, j, :, :]
                     # single_patch_img = (single_patch_img.astype('float32')) / 255. #We will preprocess using one of the backbones
-                    single_patch_img = single_patch_img[
-                        0]  # Drop the extra unecessary dimension that patchify adds.
+                    single_patch_img = single_patch_img[0]  # Drop the extra unecessary dimension that patchify adds.
 
                     cv2.imwrite(os.path.join(work_dir, "256_patches", "images",
                                              image_name + "patch_" + str(i) + str(j) + ".tif"),
