@@ -153,6 +153,8 @@ plt.show()
 # real information = if mask has decent amount of labels other than 0. 
 
 useless = 0  # Useless image counter
+os.makedirs(os.path.join('data','256_patches','images_with_useful_info','images'), exist_ok=True)
+os.makedirs(os.path.join('data','256_patches','images_with_useful_info','masks'), exist_ok=True)
 for img in range(len(img_list)):  # Using t1_list as all lists are of same size
     img_name = img_list[img]
     mask_name = msk_list[img]
