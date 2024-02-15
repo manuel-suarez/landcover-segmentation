@@ -19,10 +19,14 @@ msk_list = os.listdir(train_mask_dir)
 num_images = len(os.listdir(train_img_dir))
 img_num = random.randint(0, num_images-1)
 
-img_for_plot = cv2.imread(train_img_dir+img_list[img_num], 1)
+img_path = os.path.join(train_img_dir, img_list[img_num])
+print(img_path)
+img_for_plot = cv2.imread(img_path, 1)
 img_for_plot = cv2.cvtColor(img_for_plot, cv2.COLOR_BGR2RGB)
 
-mask_for_plot =cv2.imread(train_mask_dir+msk_list[img_num], 0)
+mask_path = os.path.join(train_mask_dir, msk_list[img_num])
+print(mask_path)
+mask_for_plot =cv2.imread(mask_path, 0)
 
 plt.figure(figsize=(12, 8))
 plt.subplot(121)
