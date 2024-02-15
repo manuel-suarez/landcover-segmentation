@@ -58,6 +58,7 @@ patch_size = 256
 # Therefore, we will crop them to a nearest size divisible by 256 and then
 # divide all images into patches of 256x256x3.
 img_dir = root_directory + "images/"
+os.makedirs(os.path.join(root_directory, '256_patches', 'images'), exist_ok=True)
 for path, subdirs, files in os.walk(img_dir):
     # print(path)
     dirname = path.split(os.path.sep)[-1]
@@ -93,6 +94,7 @@ for path, subdirs, files in os.walk(img_dir):
 # Now do the same as above for masks
 # For this specific dataset we could have added masks to the above code as masks have extension png
 mask_dir = root_directory + "masks/"
+os.makedirs(os.path.join(root_directory, '256_patches', 'masks'), exist_ok=True)
 for path, subdirs, files in os.walk(mask_dir):
     # print(path)
     dirname = path.split(os.path.sep)[-1]
